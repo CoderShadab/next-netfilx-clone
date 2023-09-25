@@ -14,7 +14,7 @@ const MovieCard: React.FC<MovieCardProps> = ({
     const router = useRouter();
     const { openModal } = useInfoModal();
 
-    return ( 
+    return (
         <div className='group bg-zinc-900 col-span relative pt-3 h-[12vw]'>
             <img
                 className='
@@ -30,7 +30,7 @@ const MovieCard: React.FC<MovieCardProps> = ({
                     w-full
                     h-[12vw]
                 '
-            src={data.thumbnailUrl} alt="Thumbnail" />
+                src={data.thumbnailUrl} alt="Thumbnail" />
             <div
                 className='
                     opacity-0
@@ -51,7 +51,7 @@ const MovieCard: React.FC<MovieCardProps> = ({
                 '
             >
                 {data?.title}
-                <img 
+                <img
                     className='
                         cursor-pointer
                         object-cover
@@ -64,8 +64,8 @@ const MovieCard: React.FC<MovieCardProps> = ({
                         relative
                     '
                     src={data.thumbnailUrl} alt="Thumbnail" />
-                    <div 
-                        className='
+                <div
+                    className='
                             z-10
                             bg-zinc-800
                             p-2
@@ -77,12 +77,12 @@ const MovieCard: React.FC<MovieCardProps> = ({
                             shadow-md
                             rounded-b-md
                         '
+                >
+                    <div
+                        className='flex flex-row items-center gap-3 text-[10px] md:text-[15px]'
                     >
                         <div
-                            className='flex flex-row items-center gap-3 text-[10px] md:text-[15px]'
-                        >
-                            <div
-                                className='
+                            className='
                                     cursor-pointer
                                     w-6
                                     h-6
@@ -98,16 +98,16 @@ const MovieCard: React.FC<MovieCardProps> = ({
                                     hover:animate-pulse
                                     hover:scale-125
                                 '
-                                onClick={()=> router.push(`/watch/${data?.id}`)}
-                            >
-                                <BsFillPlayFill size={30} color='black' className='sm:scale-75' title='Play Now'/>
-                            </div>
-                            <FavoriteButton movieId={data?.id}/>
-                            <div 
+                            onClick={() => router.push(`/watch/${data?.id}`)}
+                        >
+                            <BsFillPlayFill size={30} color='black' className='sm:scale-75' title='Play Now' />
+                        </div>
+                        <FavoriteButton movieId={data?.id} />
+                        <div
                             onClick={() => openModal(data?.id)}
                             className='cursor-pointer 
                                             group/items 
-                                            md:w-10
+                                            w-6
                                             sm:w-6
                                             h-6 
                                             lg:h-10 
@@ -123,23 +123,23 @@ const MovieCard: React.FC<MovieCardProps> = ({
                                             hover:scale-125
                                             '
                             title='More Info'
-                                            >
-                                                <BsChevronDown size={20} className='text-white'/>
-                                            </div>
-                        </div>
-                        <p className='text-green-400 mt-1'>
-                            New <span className='text-white md:text-[15px] sm:text-[13px]'>2023</span>
-                        </p>
-                        <div className='flex flex-row mt-1 gap-2 items-center'>
-                            <p className='text-white text-[10px] md:text-[15px]'>duration: {data?.duration}</p>
-                        </div>
-                        <div className='flex flex-row mt-1 gap-2 items-center'>
-                            <p className='text-white text-[10px] md:text-[15px]'>genre: {data?.genre}</p>
+                        >
+                            <BsChevronDown size={15} className='text-white' />
                         </div>
                     </div>
+                    <p className='text-green-400 mt-1'>
+                        New <span className='text-white md:text-[15px] sm:text-[13px]'>2023</span>
+                    </p>
+                    <div className='flex flex-row mt-1 gap-2 items-center'>
+                        <p className='text-white text-[10px] md:text-[15px]'>duration: {data?.duration}</p>
+                    </div>
+                    <div className='flex flex-row mt-1 gap-2 items-center'>
+                        <p className='text-white text-[10px] md:text-[15px]'>genre: {data?.genre}</p>
+                    </div>
+                </div>
             </div>
         </div>
-     );
+    );
 }
- 
+
 export default MovieCard;
