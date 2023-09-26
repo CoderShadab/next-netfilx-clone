@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 My Major Project of Clone of Netflix Clone.
 
-Demo: 
+Demo: https://next-netfilx-clone.vercel.app/
 
 ## Getting Started
 
