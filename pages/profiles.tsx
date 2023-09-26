@@ -3,9 +3,6 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 import avatar1 from "@/public/images/Netflix-avatar1.png";
-import avatar2 from '@/public/images/Netflix-avatar2.jpg';
-import avatar3 from '@/public/images/Netflix-avatar3.png';
-import avatar4 from '@/public/images/Netflix-avatar4.jpg';
 import useCurrentUser from "@/hooks/useCurrentUser";
 import { getSession } from "next-auth/react";
 

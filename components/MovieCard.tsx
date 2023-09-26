@@ -50,7 +50,7 @@ const MovieCard: React.FC<MovieCardProps> = ({
                     group-hover:opacity-100
                 '
             >
-                {data?.title}
+                <div className='pl-4 mr-12 text-lg bg-zinc-800 bg-opacity-70 rounded-md hover:bg-opacity-100 hover:font-bold'>{data?.title}</div>
                 <img
                     className='
                         cursor-pointer
@@ -108,7 +108,7 @@ const MovieCard: React.FC<MovieCardProps> = ({
                             className='cursor-pointer 
                                             group/items 
                                             w-6
-                                            sm:w-6
+                                            sm:w-10
                                             h-6 
                                             lg:h-10 
                                             border-white 
