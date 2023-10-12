@@ -1,14 +1,13 @@
+import Link from "next/link";
 import Image from "next/image";
 import logo from "@/public/images/logo.png"
 import avatar1 from "@/public/images/Netflix-avatar1.png"
-
 import NavbarItem from "./NavbarItem";
 import MobileMenu from "./MobileMenu";
 import AccountMenu from "./AccountMenu";
-
 import { BsChevronDown, BsSearch, BsBell } from 'react-icons/bs';
 import { useState, useCallback, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 
 const TOP_OFFSET = 66;
 
@@ -18,6 +17,10 @@ const Navbar = () => {
     const [showMobileMenu, setShowMobileMenu] = useState(false);
     const [showAccountMenu, setShowAccountMenu] = useState(false);
     const [showBackground, setShowBackground] = useState(false);
+
+    const handleLogoClick = () => {
+        router.reload(); // Reload the current page
+    };
 
     useEffect(() => {
         const handleScroll = () => {
@@ -56,7 +59,7 @@ const Navbar = () => {
                 ${showBackground ? 'bg-zinc-800 bg-opacity-80' : ''}
 
             `}>
-                <Image title='StreamFlix' src={logo} alt="Logo" priority className="lg:h-[36px] lg:w-[11vw] h-[6vw] w-[23vw] sm:h-[4vw] sm:w-[15vw] md:h-[4vw] md:w-[15vw]"/>
+                <Image title='StreamFlix' src={logo} alt="Logo" priority className="lg:h-[36px] lg:w-[11vw] h-[6vw] w-[23vw] sm:h-[4vw] sm:w-[15vw] md:h-[4vw] md:w-[15vw]" onClick={handleLogoClick}/>
                 <div
                     className="
                         flex-row
