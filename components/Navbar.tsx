@@ -1,4 +1,3 @@
-import Link from "next/link";
 import Image from "next/image";
 import logo from "@/public/images/logo.png"
 import avatar1 from "@/public/images/Netflix-avatar1.png"
@@ -8,6 +7,8 @@ import AccountMenu from "./AccountMenu";
 import { BsChevronDown, BsSearch, BsBell } from 'react-icons/bs';
 import { useState, useCallback, useEffect } from "react";
 import { useRouter } from "next/router";
+import Search from '@/components/Search';
+import useMovieList from '@/hooks/useMovieList';
 
 const TOP_OFFSET = 66;
 
@@ -17,10 +18,15 @@ const Navbar = () => {
     const [showMobileMenu, setShowMobileMenu] = useState(false);
     const [showAccountMenu, setShowAccountMenu] = useState(false);
     const [showBackground, setShowBackground] = useState(false);
-
+    const { data: movies = [] } = useMovieList();
     const handleLogoClick = () => {
         router.reload(); // Reload the current page
     };
+    const [showSearch, setShowSearch] = useState(false);
+
+  const toggleSearch = () => {
+    setShowSearch((prevShowSearch) => !prevShowSearch);
+  };
 
     useEffect(() => {
         const handleScroll = () => {
@@ -45,6 +51,8 @@ const Navbar = () => {
     const toogleAccountMenu = useCallback(() => {
         setShowAccountMenu((current) => !current);
     }, []);
+
+
     return ( 
         <nav className="w-full fixed z-40 scrollbar-hide">
             <div className={`
@@ -69,7 +77,7 @@ const Navbar = () => {
                         lg:flex
                     "
                 >
-                    <NavbarItem label="Home"/>
+                    <NavbarItem label="Home" onClick={handleLogoClick}/>
                     <NavbarItem label="Series"/>
                     <NavbarItem label="Films"/>
                     <NavbarItem label="New & Popular"/>
@@ -82,15 +90,18 @@ const Navbar = () => {
                     </p>
                     <BsChevronDown className={`text-white transition ${showMobileMenu ? 'rotate-0' : '-rotate-90'}`}/>
                     <MobileMenu visible={showMobileMenu}/>
-                </div>
+                </div> 
                 <div className="flex flex-row ml-auto gap-7 items-center">
-                    <div className="text-gray-200 hover:text-gray-300 cursor-pointer">
+                <div className={`navbar-search mt-12 md:mt-7 md:mr-32 lg:mt-6 lg:mr-52 mr-6 ${showSearch ? 'active' : ''}`} style={{ zIndex: showSearch ? 1 : 0 }}>
+                    {showSearch && <Search details={movies} />}
+                </div>
+                    <div className="text-gray-200 flex hover:text-gray-300 cursor-pointer gap-2" onClick={toggleSearch}>
                         <BsSearch />
                     </div>
+                    
                     <div className="text-gray-200 hover:text-gray-300 cursor-pointer">
                         <BsBell />
                     </div>
-
                     <div onClick={toogleAccountMenu} className="flex flex-row items-center gap-2 cursor-pointer relative">
                         <div className="w-6 h-6 lg:w-10 lg:h-10 rounded-lg overflow-hidden">
                             <Image src={avatar1} alt="Avatar" priority/>

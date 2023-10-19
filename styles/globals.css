@@ -15,3 +15,17 @@ html {
     @apply h-full;
 }
 
+.navbar-search {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s;
+    transform: translateX(100%);
+  }
+  
+  .navbar-search.active {
+    transform: translateX(0);
+  }
+  
