@@ -13,7 +13,7 @@ const SearchList: React.FC<SearchListProps> = ({ filteredPersons }) => {
   ));
 
 
-  
+
   return (
     <div className=''>
       {filtered}

@@ -10,7 +10,7 @@ const PlayButton: React.FC<PlayButtonProps> = ({ movieId }) => {
   const router = useRouter();
 
   return (
-    <button 
+    <button
       onClick={() => router.push(`/watch/${movieId}`)}
       className="
       bg-white 
@@ -31,9 +31,9 @@ const PlayButton: React.FC<PlayButtonProps> = ({ movieId }) => {
       transition
       hover:animate-bounce
         "
-      >
-        <BsFillPlayFill className="mr-1 md:h-5 md:w-5 sm:h-3 sm:w-3" size={30}/>
-        Play
+    >
+      <BsFillPlayFill className="mr-1 md:h-5 md:w-5 sm:h-3 sm:w-3" size={30} />
+      Play
     </button>
   );
 }

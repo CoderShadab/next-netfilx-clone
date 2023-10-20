@@ -7,46 +7,46 @@ import useCurrentUser from "@/hooks/useCurrentUser";
 import useFavorites from "@/hooks/useFavorites";
 
 interface FavoriteButtonProps {
-    movieId: string;
+  movieId: string;
 }
 
 const FavoriteButton: React.FC<FavoriteButtonProps> = ({
-    movieId,
+  movieId,
 }) => {
-    const { mutate: mutateFavorites } = useFavorites();
+  const { mutate: mutateFavorites } = useFavorites();
 
-    const { data: currentUser, mutate } = useCurrentUser();
-  
-    const isFavorite = useMemo(() => {
-      const list = currentUser?.favoriteIds || [];
-  
-      return list.includes(movieId);
-    }, [currentUser, movieId]);
-  
-    const toggleFavorites = useCallback(async () => {
-      let response;
-  
-      if (isFavorite) {
-        response = await axios.delete('/api/favorite', { data: { movieId } });
-      } else {
-        response = await axios.post('/api/favorite', { movieId });
-      }
-  
-      const updatedFavoriteIds = response?.data?.favoriteIds;
-  
-      mutate({ 
-        ...currentUser, 
-        favoriteIds: updatedFavoriteIds,
-      });
-      mutateFavorites();
-    }, [movieId, isFavorite, currentUser, mutate, mutateFavorites]);
+  const { data: currentUser, mutate } = useCurrentUser();
 
-    const Icon = isFavorite ? AiOutlineCheck : AiOutlinePlus;
+  const isFavorite = useMemo(() => {
+    const list = currentUser?.favoriteIds || [];
 
-    return ( 
-        <div 
-            onClick={toggleFavorites}
-            className="
+    return list.includes(movieId);
+  }, [currentUser, movieId]);
+
+  const toggleFavorites = useCallback(async () => {
+    let response;
+
+    if (isFavorite) {
+      response = await axios.delete('/api/favorite', { data: { movieId } });
+    } else {
+      response = await axios.post('/api/favorite', { movieId });
+    }
+
+    const updatedFavoriteIds = response?.data?.favoriteIds;
+
+    mutate({
+      ...currentUser,
+      favoriteIds: updatedFavoriteIds,
+    });
+    mutateFavorites();
+  }, [movieId, isFavorite, currentUser, mutate, mutateFavorites]);
+
+  const Icon = isFavorite ? AiOutlineCheck : AiOutlinePlus;
+
+  return (
+    <div
+      onClick={toggleFavorites}
+      className="
                 cursor-pointer
                 group/item 
                 ml-auto
@@ -63,9 +63,9 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({
                 hover:scale-125
                 hover:border-neutral-300
          ">
-            <Icon className='text-white sm:scale-75' size={25} title="WishList"/>
-        </div>
-     );
+      <Icon className='text-white sm:scale-75' size={25} title="WishList" />
+    </div>
+  );
 }
- 
+
 export default FavoriteButton;

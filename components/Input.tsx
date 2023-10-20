@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface InputProps {
-    id:string;
+    id: string;
     onChange: any;
     value: string;
     label: string;
@@ -16,8 +16,8 @@ const Input: React.FC<InputProps> = ({
     type
 }) => {
     return (
-        <div className="relative"> 
-            <input 
+        <div className="relative">
+            <input
                 onChange={onChange}
                 type={type}
                 value={value}
@@ -40,7 +40,7 @@ const Input: React.FC<InputProps> = ({
                 placeholder=" "
                 autoComplete='on'
             />
-            <label 
+            <label
                 className="
                     absolute 
                     text-md
@@ -59,10 +59,10 @@ const Input: React.FC<InputProps> = ({
                     peer-focus:-translate-y-3
                 "
                 htmlFor={id}>
-                    {label}
+                {label}
             </label>
         </div>
-     );
+    );
 }
- 
+
 export default Input;

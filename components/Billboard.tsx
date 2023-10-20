@@ -55,10 +55,10 @@ const Billboard = () => {
                     <span>|</span>
                     {data?.duration}
                     <span>|</span>
-                    <PlayButton movieId={data?.id}/>
+                    <PlayButton movieId={data?.id} />
                     <div className='flex flex-col'>
                         <button
-                        onClick={handleOpenModal}
+                            onClick={handleOpenModal}
                             className='
                                     bg-white
                                     text-white
@@ -76,7 +76,7 @@ const Billboard = () => {
                                     transition
                                 '
                         >
-                            <AiOutlineInfoCircle className='mr-1 md:h-4 md:w-4 sm:h-3 sm:w-3' size={15}/>
+                            <AiOutlineInfoCircle className='mr-1 md:h-4 md:w-4 sm:h-3 sm:w-3' size={15} />
                             More Info
                         </button>
                     </div>

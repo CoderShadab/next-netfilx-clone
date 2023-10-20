@@ -4,8 +4,8 @@ import SearchList from '@/components/SearchList';
 
 
 function Search({ details }) {
-  
-  
+
+
   const [searchField, setSearchField] = useState("");
   const [searchShow, setSearchShow] = useState(false);
 
@@ -18,10 +18,10 @@ function Search({ details }) {
       setSearchShow(true);
     }
   };
-  
+
   const filteredPersons = details.filter((person) => {
     return (
-      person.title.toLowerCase().includes(searchField?.toLowerCase() || "") 
+      person.title.toLowerCase().includes(searchField?.toLowerCase() || "")
     );
   });
 
@@ -33,23 +33,23 @@ function Search({ details }) {
       } else {
         return (
           <div className='text-white'>
-            <SearchList filteredPersons={filteredPersons} movieId=''/>
+            <SearchList filteredPersons={filteredPersons} movieId='' />
           </div>
         );
       }
     }
   }
 
-  
+
 
   return (
     <div className="">
       <div className="space-y-">
-        <input 
+        <input
           className="w-1/2 p-[1%] md:w-[70%] md:p-1 lg:w-full lg:p-2 bg-opacity-30  bg-black rounded-md text-white"
-          type = "search" 
-          placeholder = "Search Movie" 
-          onChange = {handleChange}
+          type="search"
+          placeholder="Search Movie"
+          onChange={handleChange}
         />
       </div>
       <div className='mt-3'>
