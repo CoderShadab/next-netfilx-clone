@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import SearchCard from './SearchCard';
 import useMovieList from '@/hooks/useMovieList';
+import { useRouter } from 'next/router';
 
 function Card({ person }) {
   const { data: movies = [] } = useMovieList();
   const [isInfoVisible, setIsInfoVisible] = useState(false);
   const cardRef = useRef(null);
-
+  const router = useRouter();
   const matchingMovie = movies.find((movie) => movie.id === person.id);
 
   const handleMouseEnter = () => {
@@ -34,7 +35,7 @@ function Card({ person }) {
   return (
     <div className="text-white bg-black p-2 pb-5 rounded-md" ref={cardRef}>
       <div>
-        <h2 className="cursor-pointer" onMouseEnter={handleMouseEnter}>
+        <h2 className="cursor-pointer" onMouseEnter={handleMouseEnter} onClick={() => router.push(`/watch/${matchingMovie}`)}>
           {person.title}
         </h2>
         <hr className="opacity-50 mt-1" />
