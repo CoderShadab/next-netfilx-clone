@@ -31,7 +31,7 @@ const Billboard = () => {
                 poster={data?.thumbnailUrl}
                 src={data?.trailUrl}>
             </video>
-            <div className='absolute top-[35%] md:top-[25%] ml-4 md:ml-16 text-white text-opacity-80'>
+            <div className='absolute top-[35%] md:top-[25%] ml-4 md:ml-16 text-white text-opacity-80 p-5 lg:backdrop-blur-sm lg:rounded-lg lg:bg-black lg:bg-opacity-40 lg:w-[50%]'>
                 <p className='sm:text-[20px] text-[13px] md:text-4xl h-full w-[40%] lg:text-6xl font-bold drop-shadow-xl'>
                     {data?.title}
                 </p>
@@ -43,7 +43,7 @@ const Billboard = () => {
                         md:mt-8
                         w-[90%]
                         md:w-[80%]
-                        lg:w-[50%]
+                        lg:w-[90%]
                         drop-shadow-xl
                     '>
                     {data?.description}
@@ -55,10 +55,10 @@ const Billboard = () => {
                     <span>|</span>
                     {data?.duration}
                     <span>|</span>
-                    <PlayButton movieId={data?.id} />
+                    <PlayButton movieId={data?.id}/>
                     <div className='flex flex-col'>
                         <button
-                            onClick={handleOpenModal}
+                        onClick={handleOpenModal}
                             className='
                                     bg-white
                                     text-white
@@ -76,7 +76,7 @@ const Billboard = () => {
                                     transition
                                 '
                         >
-                            <AiOutlineInfoCircle className='mr-1 md:h-4 md:w-4 sm:h-3 sm:w-3' size={15} />
+                            <AiOutlineInfoCircle className='mr-1 md:h-4 md:w-4 sm:h-3 sm:w-3' size={15}/>
                             More Info
                         </button>
                     </div>
