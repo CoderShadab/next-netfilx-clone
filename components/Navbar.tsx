@@ -9,7 +9,6 @@ import { useState, useCallback, useEffect } from "react";
 import { useRouter } from "next/router";
 import Search from '@/components/Search';
 import useMovieList from '@/hooks/useMovieList';
-
 const TOP_OFFSET = 66;
 
 const Navbar = () => {
@@ -24,14 +23,14 @@ const Navbar = () => {
     };
     const [showSearch, setShowSearch] = useState(false);
 
-    const toggleSearch = () => {
-        setShowSearch((prevShowSearch) => !prevShowSearch);
-    };
+  const toggleSearch = () => {
+    setShowSearch((prevShowSearch) => !prevShowSearch);
+  };
 
     useEffect(() => {
         const handleScroll = () => {
             if (window.scrollY >= TOP_OFFSET) {
-                setShowBackground(true);
+             setShowBackground(true);
             } else {
                 setShowBackground(false);
             }
@@ -45,15 +44,16 @@ const Navbar = () => {
     }, []);
 
     const toogleMobileMenu = useCallback(() => {
-        setShowMobileMenu((current) => !current);
+       setShowMobileMenu((current) => !current); 
     }, []);
 
     const toogleAccountMenu = useCallback(() => {
         setShowAccountMenu((current) => !current);
     }, []);
+    
 
 
-    return (
+    return ( 
         <nav className="w-full fixed z-40 scrollbar-hide">
             <div className={`
                 px-4
@@ -67,7 +67,7 @@ const Navbar = () => {
                 ${showBackground ? 'bg-zinc-800 bg-opacity-80' : ''}
 
             `}>
-                <Image title='StreamFlix' src={logo} alt="Logo" priority className="lg:h-[36px] lg:w-[11vw] h-[6vw] w-[23vw] sm:h-[4vw] sm:w-[15vw] md:h-[4vw] md:w-[15vw]" onClick={handleLogoClick} />
+                <Image title='StreamFlix' src={logo} alt="Logo" priority className="lg:h-[36px] lg:w-[11vw] h-[6vw] w-[23vw] sm:h-[4vw] sm:w-[15vw] md:h-[4vw] md:w-[15vw]" onClick={handleLogoClick}/>
                 <div
                     className="
                         flex-row
@@ -77,42 +77,41 @@ const Navbar = () => {
                         lg:flex
                     "
                 >
-                    <NavbarItem label="Home" onClick={handleLogoClick} />
-                    <NavbarItem label="Series" />
-                    <NavbarItem label="Films" />
-                    <NavbarItem label="New & Popular" />
-                    <NavbarItem label="My List" />
-                    <NavbarItem label="Browse by languages" />
+                    <NavbarItem label="Home" onClick={handleLogoClick}/>
+                    <NavbarItem label="Series"/>
+                    <NavbarItem label="Films"/>
+                    <NavbarItem label="New & Popular"/>
+                    <NavbarItem label="My List"/>
+                    <NavbarItem label="Browse by languages"/>
                 </div>
                 <div onClick={toogleMobileMenu} className="lg:hidden flex flex-row items-center gap-2 ml-4 cursor-pointer relative">
                     <p className="text-white text-[13px]">
                         Browse
                     </p>
-                    <BsChevronDown className={`text-white transition ${showMobileMenu ? 'rotate-0' : '-rotate-90'}`} />
-                    <MobileMenu visible={showMobileMenu} />
-                </div>
+                    <BsChevronDown className={`text-white transition ${showMobileMenu ? 'rotate-0' : '-rotate-90'}`}/>
+                    <MobileMenu visible={showMobileMenu}/>
+                </div> 
                 <div className="flex flex-row ml-auto gap-7 items-center">
-                    <div className={`navbar-search mt-12 md:mt-7 md:mr-32 lg:mt-6 lg:mr-52 mr-6 ${showSearch ? 'active' : ''}`} style={{ zIndex: showSearch ? 1 : 0 }}>
-                        {showSearch && <Search details={movies} />}
-                    </div>
+                <div className={`navbar-search mt-12 md:mt-7 md:mr-32 lg:mt-6 lg:mr-52 mr-6 ${showSearch ? 'active' : ''}`} style={{ zIndex: showSearch ? 1 : 0 }}>
+                    {showSearch && <Search details={movies} />}
+                </div>
                     <div className="text-gray-200 flex hover:text-gray-300 cursor-pointer gap-2" onClick={toggleSearch}>
                         <BsSearch />
                     </div>
-
+                    
                     <div className="text-gray-200 hover:text-gray-300 cursor-pointer">
                         <BsBell />
                     </div>
                     <div onClick={toogleAccountMenu} className="flex flex-row items-center gap-2 cursor-pointer relative">
                         <div className="w-6 h-6 lg:w-10 lg:h-10 rounded-lg overflow-hidden">
-                            <Image src={avatar1} alt="Avatar" priority />
+                            <Image src={avatar1} alt="Avatar" priority/>
                         </div>
-                        <AccountMenu visible={showAccountMenu} />
+                        <AccountMenu visible={showAccountMenu}/>
                     </div>
-
                 </div>
             </div>
         </nav>
-    );
+     );
 }
-
+ 
 export default Navbar;
