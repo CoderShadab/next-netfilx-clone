@@ -73,3 +73,10 @@ model Movie {
   age String
   trailUrl String
 }
+
+model Feedback {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  email String
+  feedback String
+}
