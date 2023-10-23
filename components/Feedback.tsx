@@ -2,13 +2,14 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
-
+import Notification from './Notification';
 interface FeedbackProps {
   visible?: boolean;
   onClose: any;
 }
 
 const Feedback: React.FC<FeedbackProps> = ({ visible, onClose }) => {
+  const [notification, setNotification] = useState<{ message: string; type: string } | null>(null);
   const [isVisible, setIsVisible] = useState<boolean>(!!visible);
   const router = useRouter();
 
@@ -18,6 +19,14 @@ const Feedback: React.FC<FeedbackProps> = ({ visible, onClose }) => {
   useEffect(() => {
     setIsVisible(!!visible);
   }, [visible]);
+
+  const showNotification = (message: string, type: string) => {
+    setNotification({ message, type });
+  };
+
+  const closeNotification = () => {
+    setNotification(null);
+  };
 
   const handleClose = useCallback(() => {
     setIsVisible(false);
@@ -33,13 +42,18 @@ const Feedback: React.FC<FeedbackProps> = ({ visible, onClose }) => {
         name,
         feedback
       });
-      router.reload()
+      showNotification('Form submitted successfully!', 'success');
       console.log("submitted");
+      setTimeout(() => {
+        closeNotification();
+        handleClose(); // Close the notification after a delay
+      }, 3000);
+      
 
     } catch (error) {
       console.log(error);
     }
-  }, [email, name, feedback, router]);
+  }, [email, name, feedback, handleClose]);
 
 
   if (!visible) {
@@ -60,9 +74,9 @@ const Feedback: React.FC<FeedbackProps> = ({ visible, onClose }) => {
           <div className="px-12 py-8 text-white flex flex-col gap-5">
 
             <span className='flex gap-3'>
-              Name:
+              <label htmlFor='name'>Name:</label>
               <input
-                autoComplete='true'
+                autoComplete='on'
                 id="name"
                 className='form-input w-56 text-sm rounded-lg outline-none bg-zinc-900 border-b-gray-600 focus:border-white focus:duration-50 border-gray-300 border-b-[2px] border-t-0 border-l-0 border-r-0 placeholder:text-gray-500 p-1'
                 placeholder='Enter Name'
@@ -72,9 +86,9 @@ const Feedback: React.FC<FeedbackProps> = ({ visible, onClose }) => {
               ></input>
             </span>
             <span className='flex gap-4'>
-              Email:
+              <label htmlFor='email'>Email:</label>
               <input
-                autoComplete='true'
+                autoComplete='on'
                 id='email'
                 className='form-input w-56 text-sm rounded-lg outline-none bg-zinc-900 transition border-b-gray-600 focus:border-white focus:duration-50 border-gray-300 border-b-[2px] border-t-0 border-l-0 border-r-0 placeholder:text-gray-500 p-1'
                 placeholder='Enter Email'
@@ -83,10 +97,10 @@ const Feedback: React.FC<FeedbackProps> = ({ visible, onClose }) => {
                 onChange={(e: any) => setEmail(e.target.value)}
               ></input></span>
             <div className='flex flex-col gap-2'>
-              Enter your Feedback:
+              <label htmlFor='feedback'>Enter your Feedback:</label>
               <textarea 
               id='feedback' 
-              className='h-44 rounded-md outline-none text-black' 
+              className='h-44 p-1 rounded-md outline-none text-black' 
               value={feedback}
               onChange={(e: any) => setFeedback(e.target.value)}></textarea>
             </div>
@@ -95,6 +109,13 @@ const Feedback: React.FC<FeedbackProps> = ({ visible, onClose }) => {
             </div>
           </div>
         </div>
+        {notification && (
+        <Notification
+          message={notification.message}
+          type={notification.type}
+          onClose={closeNotification}
+        />
+      )}
       </div>
     </div>
   );
