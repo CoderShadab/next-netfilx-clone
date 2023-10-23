@@ -8,6 +8,8 @@ import useMovieList from '@/hooks/useMovieList';
 import useFavorites from '@/hooks/useFavorites';
 import InfoModal from '@/components/InfoModal';
 import useInfoModal from '@/hooks/useInfoModel';
+import Feedback from '@/components/Feedback';
+import useFeedbackModal from '@/hooks/useFeedbackModal';
 
 export async function getServerSideProps(context: NextPageContext) {
   const session = await getSession(context);
@@ -29,6 +31,7 @@ export default function Home() {
   const { data: movies = [] } = useMovieList();
   const { data: favorites = [] } = useFavorites();
   const { isOpen, closeModal } = useInfoModal();
+  const { isFeedOpen, closeFeedModal } = useFeedbackModal();
 
   return (
     <>
@@ -43,6 +46,7 @@ export default function Home() {
         <link rel="manifest" href="/site.webmanifest"></link>
       </Head>
       <InfoModal visible={isOpen} onClose={closeModal}/>
+      <Feedback visible={isFeedOpen} onClose={closeFeedModal} />
       <Navbar />
       <Billboard />
       <div className='pb-40 mt-16 sm:mt-2 lg:mt-10 flex flex-col gap-4'>
