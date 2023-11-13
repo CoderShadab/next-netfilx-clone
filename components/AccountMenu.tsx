@@ -5,7 +5,7 @@ import {useRouter} from "next/navigation";
 import { MdFeedback } from 'react-icons/md';
 import { PiSignOut } from 'react-icons/pi';
 
-import avatar1 from '@/public/images/Netflix-avatar1.png'
+
 import useCurrentUser from "@/hooks/useCurrentUser";
 import useFeedbackModal from "@/hooks/useFeedbackModal";
 interface AccountMenuProps {
