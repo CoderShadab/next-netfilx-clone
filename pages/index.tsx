@@ -10,6 +10,8 @@ import InfoModal from '@/components/InfoModal';
 import useInfoModal from '@/hooks/useInfoModel';
 import Feedback from '@/components/Feedback';
 import useFeedbackModal from '@/hooks/useFeedbackModal';
+import { useRouter } from 'next/router';
+
 
 export async function getServerSideProps(context: NextPageContext) {
   const session = await getSession(context);
@@ -33,6 +35,12 @@ export default function Home() {
   const { isOpen, closeModal } = useInfoModal();
   const { isFeedOpen, closeFeedModal } = useFeedbackModal();
 
+  const router = useRouter();
+
+    // Access the query parameter (index)
+    const index = typeof router.query.index === 'string' ? parseInt(router.query.index, 10) : undefined;
+
+
   return (
     <>
       <Head>
@@ -47,7 +55,7 @@ export default function Home() {
       </Head>
       <InfoModal visible={isOpen} onClose={closeModal}/>
       <Feedback visible={isFeedOpen} onClose={closeFeedModal} />
-      <Navbar />
+      <Navbar index={index}/>
       <Billboard />
       <div className='pb-40 mt-16 sm:mt-2 lg:mt-10 flex flex-col gap-4'>
         <MovieList title='Trending Now' data={movies}/>

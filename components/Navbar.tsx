@@ -1,6 +1,6 @@
 import Image from "next/image";
 import logo from "@/public/images/logo.png"
-import avatar1 from "@/public/images/Netflix-avatar1.png"
+
 import NavbarItem from "./NavbarItem";
 import MobileMenu from "./MobileMenu";
 import AccountMenu from "./AccountMenu";
@@ -11,21 +11,36 @@ import Search from '@/components/Search';
 import useMovieList from '@/hooks/useMovieList';
 const TOP_OFFSET = 66;
 
-const Navbar = () => {
+interface NavbarProps {
+    index: number | undefined;
+}
+
+const Navbar: React.FC<NavbarProps> = ({
+    index
+}) => {
     const router = useRouter();
 
     const [showMobileMenu, setShowMobileMenu] = useState(false);
     const [showAccountMenu, setShowAccountMenu] = useState(false);
     const [showBackground, setShowBackground] = useState(false);
     const { data: movies = [] } = useMovieList();
+    const indexString = Array.isArray(index) ? index[0] : index;
+
     const handleLogoClick = () => {
         router.reload(); // Reload the current page
     };
     const [showSearch, setShowSearch] = useState(false);
 
-  const toggleSearch = () => {
-    setShowSearch((prevShowSearch) => !prevShowSearch);
-  };
+    const toggleSearch = () => {
+        setShowSearch((prevShowSearch) => !prevShowSearch);
+    };
+
+    const localImagePaths = [
+        '/images/Netflix-avatar1.png',
+        '/images/Netflix-avatar2.jpg',
+        '/images/Netflix-avatar3.png',
+        '/images/Netflix-avatar4.jpg'
+      ];
 
     useEffect(() => {
         const handleScroll = () => {
@@ -104,9 +119,9 @@ const Navbar = () => {
                     </div>
                     <div onClick={toogleAccountMenu} className="flex flex-row items-center gap-2 cursor-pointer relative">
                         <div className="w-6 h-6 lg:w-10 lg:h-10 rounded-lg overflow-hidden">
-                            <Image src={avatar1} alt="Avatar" priority/>
+                        <Image src={localImagePaths[indexString - 1]} alt="Avatar" width={50} height={50}/>
                         </div>
-                        <AccountMenu visible={showAccountMenu}/>
+                        <AccountMenu visible={showAccountMenu} index={index}/>
                     </div>
                 </div>
             </div>
