@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 
 import { NextPageContext } from "next";
@@ -27,7 +28,6 @@ export async function getServerSideProps(context: NextPageContext) {
 const Profiles = () => {
     const router = useRouter();
     const { data: user } = useCurrentUser();
-   
     const localImagePaths = [
         '/images/Netflix-avatar1.png',
         '/images/Netflix-avatar2.jpg',
@@ -35,8 +35,9 @@ const Profiles = () => {
         '/images/Netflix-avatar4.jpg'
     ];
 
+
     const handleImageClick = (index: number) => {
-        
+        localStorage.setItem('selectedProfileIndex', index.toString());
         router.push({
             pathname: '/',
             query: { index: index },
@@ -44,6 +45,7 @@ const Profiles = () => {
         
     };
     
+
     return (
         <div className="flex items-center h-full justify-center">
             <div className="flex flex-col">
